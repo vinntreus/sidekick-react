@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "postinstall": "gulp build" //heroku specific
+    "postinstall": "gulp build"
   },
   "dependencies": {
     "browserify": "^5.12.1",
