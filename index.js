@@ -16,7 +16,7 @@ var version = pjson.version;
 var app = express();
 
 app.use(compress());
-app.use(express.static(__dirname + '/dist'), {maxAge:cacheControlMaxAge});
+app.use(express.static(__dirname + '/dist',{maxAge:cacheControlMaxAge}));
 
 app.get('/', function(req, res){
     fs.readFile('./ui/index.html',{ encoding: 'utf8' }, function (err, data) {
