@@ -6,12 +6,17 @@ var fs = require('fs');
 
 //process.env.NODE_ENV = 'production';
 
-var env = process.env.NODE_ENV === 'production' ? '.min' : '';
+var env = '';
+var cacheControlMaxAge = 0;
+if(process.env.NODE_ENV === 'production'){
+    env = '.min';
+    cacheControlMaxAge = 31536000;
+}
 var version = pjson.version;
 var app = express();
 
 app.use(compress());
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist'), {maxAge:cacheControlMaxAge});
 
 app.get('/', function(req, res){
     fs.readFile('./ui/index.html',{ encoding: 'utf8' }, function (err, data) {
