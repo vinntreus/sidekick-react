@@ -3,9 +3,12 @@
   "version": "0.0.1",
   "description": "Recruiters best friend",
   "author": "Daniel Vinntreus",
+  "engines": {
+    "node": "0.10.32"
+  },
   "scripts": {
     "start": "node index.js",
-    "postinstall": "gulp build"
+    "postinstall": "gulp build" //heroku specific
   },
   "dependencies": {
     "browserify": "^5.12.1",
