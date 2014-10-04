@@ -26,7 +26,10 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "devDependencies": {
+    "gulp-livereload": "^2.1.1",
     "gulp-nodemon": "^1.0.4",
-    "nodemon": "^1.2.1"
+    "livereload": "^0.3.4",
+    "nodemon": "^1.2.1",
+    "watchify": "^1.0.6"
   }
 }
