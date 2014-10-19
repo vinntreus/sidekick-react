@@ -2,5 +2,14 @@ body{
     background-color:#f2f2f2;
 }
 h1, h2, h3, h4, h5{
-    font-family: Tahoma;
+    font-family: 'Open Sans', sans-serif;
+}
+h1, h2{
+    margin-bottom: 20px;
+}
+.navbar-default{
+    margin-bottom: 0;
+}
+.list-group-item-text{
+    color:#888;
 }
