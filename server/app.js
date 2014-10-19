@@ -14,11 +14,12 @@ module.exports = function(baseDir){
       cacheControlMaxAge = 31536000; //1 year
   }
   var version = pjson.version;
-  
+
   var app = express();
 
   app.use(compress());
   app.use(express.static(baseDir + '/dist',{maxAge:cacheControlMaxAge}));
+  app.use(express.static(baseDir + '/ui/img',{maxAge:cacheControlMaxAge}));
 
   app.get('/', function(req, res){
       fs.readFile('./ui/index.html',{ encoding: 'utf8' }, function (err, data) {
@@ -30,6 +31,8 @@ module.exports = function(baseDir){
 
   app.get('/data.json', function(req, res){
       res.send([
+          {"name": "Pete Hunt", "text": "This is one comment"},
+          {"name": "Pete Hunt", "text": "This is one comment"},
           {"name": "Pete Hunt", "text": "This is one comment"}
       ]);
   });

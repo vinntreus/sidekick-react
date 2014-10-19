@@ -1,5 +1,5 @@
 .page-loader{
-    background:black url('/src/img/ajax-loader-page.gif') center center no-repeat;
+    background:black url('/ajax-loader-page.gif') center center no-repeat;
     position: absolute;
     top: 0%;
     left: 0%;
@@ -11,7 +11,7 @@
     filter: alpha(opacity=70);
 }
 .block-loader{
-    background:transparent url('/src/img/ajax-loader-block.gif') top left no-repeat;
+    background:transparent url('/ajax-loader-block.gif') top left no-repeat;
     width:24px;
     height: 24px;
 }
