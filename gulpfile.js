@@ -8,9 +8,15 @@ var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 
-//var nodemon = require.resolve('gulp-nodemon') ? require('gulp-nodemon') : null;
-//var livereload = require.resolve('gulp-livereload') ? require('gulp-livereload') : null;
-//var watchify = require.resolve('watchify') ? require('watchify') : null;
+var nodemon, livereload, watchify;
+
+//ugly hack to run build without dev dependecie
+//require.resolve does not work on heroku
+try{
+nodemon = require('gulp-nodemon');
+livereload = require('gulp-livereload');
+watchify = require('watchify');
+} catch(e){}
 
 var baseDir = 'ui';
 var buildDir = './dist/';
@@ -52,7 +58,7 @@ gulp.task('livereload', function(){
 });
 
 // The default task (called when we run `gulp` from cli)
-gulp.task('default', ['watch', 'css', 'js']);
+gulp.task('default', ['develop']);
 
 
 gulp.task('css-watch', function() {
