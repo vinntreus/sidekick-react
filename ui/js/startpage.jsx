@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 var twix = require('./libs/twix');
+var AddCandidate = require('./add-candidate.jsx');
 
 var Loader = React.createClass({
   render: function(){
@@ -11,6 +12,7 @@ var CandidateBox = React.createClass({
   render: function() {
     return (
       <div className="candidates">
+        <AddCandidate />
         <h2>Candidates</h2>
         <CandidateList url="/data.json" />
       </div>
@@ -21,18 +23,23 @@ var CandidateBox = React.createClass({
 var CandidateList = React.createClass({
   load: function(){
     var self = this;
-      twix.ajax({
+    var loadingTimeout = window.setTimeout(function(){
+      var state = self.state;
+      state.loading = true;
+      self.setState(state);
+    }, 300);
+    
+    twix.ajax({
       url: self.props.url,
-      success: function(data) {
-        window.setTimeout(function(){
-          self.setState({data: data, loading:false});
-        }, 1);
+      success: function(data) {        
+        window.clearTimeout(loadingTimeout);
+        self.setState({data: data, loading:false});
       },
       error: function(xhr, status, err) {
+        self.setState({data: [], loading:false})
         console.error(self.props.url, status, err.toString());
       }
     });
-    //self.setState({data: [], loading:false});
   },
   getInitialState: function() {
     return {data: [], loading : false};
@@ -72,7 +79,15 @@ var Candidate = React.createClass({
 
 var Heading = React.createClass({
   render: function renderHeading(){
-    return (<h1>Sidekick</h1>);
+    return (
+      <header className="navbar navbar-default">
+        <Container>
+          <div className="navbar-header">
+            <a href="/" className="navbar-brand">Sidekick</a>
+          </div>
+        </Container>
+      </header>
+    );
   }
 });
 
@@ -82,11 +97,22 @@ var Container = React.createClass({
   }
 });
 
+var Page = React.createClass({
+  render : function renderBody(){
+    return (<div className="page">{this.props.children}</div>)
+  }
+});
 
-React.renderComponent(
-  <Container>
-    <Heading />
-    <CandidateBox />
-  </Container>,
-  document.body
-);
+module.exports = {
+  render : function(){
+    React.renderComponent(
+      <Page>
+        <Heading />
+        <Container>
+          <CandidateBox />
+        </Container>
+      </Page>,
+      document.body
+    );
+  }
+};

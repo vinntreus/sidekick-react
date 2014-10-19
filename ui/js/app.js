@@ -1,1 +1,3 @@
-var candidateList = require('./startpage.jsx');
+var startpage = require('./startpage.jsx');
+
+startpage.render();
