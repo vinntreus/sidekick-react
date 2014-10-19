@@ -7,9 +7,10 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
-var nodemon = require('gulp-nodemon');
-var livereload = require('gulp-livereload');
-var watchify = require('watchify');
+
+var nodemon = require.resolve('gulp-nodemon') ? require('gulp-nodemon') : null;
+var livereload = require.resolve('gulp-livereload') ? require('gulp-livereload') : null;
+var watchify = require.resolve('watchify') ? require('watchify') : null;
 
 var baseDir = 'ui';
 var buildDir = './dist/';
